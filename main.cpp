@@ -1,10 +1,14 @@
 #include <iostream>
-#include <vector>
+#include "graf.cpp"
 
 using namespace std;
 
 int main(){
-  vector <vector<int> > wierz (5, vector<int> (5));
+    Graf gr(10);
+    gr.Tworzenie_sc(25);
+    cout << "cook" << endl;
+    gr.Wyswietlanie();
+    cout << "coook" << endl;
   
 }
 

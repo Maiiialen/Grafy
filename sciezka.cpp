@@ -25,4 +25,7 @@ class Sciezka {
         return koniec->Index();
     }
 
+    int Wartosc(){
+        return waga;
+    }
 };
