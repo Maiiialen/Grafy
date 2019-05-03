@@ -1,11 +1,13 @@
 #include <iostream>
-#include "graf.cpp"
+#include "czaszapis.cpp"
 
 using namespace std;
 
 int main(){
     Graf gr(10);
-    gr.Tworzenie_sc(100);
+    int proc = 25, ilosc = proc*(gr.Wierz_size()*(gr.Wierz_size()-1))/200;
+    //gr.Tworzenie_sc(ilosc);
+    gr.Wczytanie_z_pliku("test.txt");
     gr.Wyswietlanie();
   
 }

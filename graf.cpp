@@ -15,7 +15,14 @@ class Graf {
     Graf(int il_wierz);
     void Tworzenie_sc(int proc);
     void Wyswietlanie();
+    int Wierz_size();
+    void Wczytanie_z_pliku(string nazwa);
 };
+
+
+int Graf::Wierz_size(){
+    return Wierzcholki.size(); 
+}
 
 void Graf::Wyswietlanie(){
     for(int i = 0; i < Wierzcholki.size(); ++i){
@@ -27,6 +34,9 @@ void Graf::Wyswietlanie(){
             }
         }
         cout << endl;
+    }
+    for(int j = 0; j < Sciezki.size(); ++j){
+        cout << Sciezki[j]->Wartosc() << " ";
     }
 }
 
@@ -45,12 +55,13 @@ Graf::Graf(int il_wierz){
     }
 }
 
-void Graf::Tworzenie_sc(int proc){
+void Graf::Tworzenie_sc(int ilosc){
     srand(time(NULL));
-    int ilosc = proc*(Wierzcholki.size()*(Wierzcholki.size()-1))/200, wartosc, i, p, k, test, n = Wierzcholki.size() -1;
+    int proc = 200*ilosc/(Wierz_size()*(Wierz_size()-1));
+    int wartosc, i, p, k, test, n = Wierzcholki.size() -1;
     if(proc != 100){
         for(int i=0; i < Wierzcholki.size() - 1; ++i){
-            wartosc = (rand() % 20) + 0;
+            wartosc = (rand() % 20) + 1;
             Sciezki.push_back(new Sciezka(Wierzcholki[i], Wierzcholki[i+1], wartosc, i));
 
             Macierz[i][i+1]=Sciezki[i];
@@ -64,9 +75,9 @@ void Graf::Tworzenie_sc(int proc){
             k = rand() % n + 1;
             if(p != k){
                 if(Macierz[p][k] == NULL){
-                    Sciezki.push_back(new Sciezka(Wierzcholki[p], Wierzcholki[k], wartosc, i));
-                    Macierz[p][k]=Sciezki[i-1];
-                    Macierz[k][p]=Sciezki[i-1];
+                    Sciezki.push_back(new Sciezka(Wierzcholki[p], Wierzcholki[k], wartosc, Sciezki.size()));
+                    Macierz[p][k] = Sciezki[Sciezki.size()-1];
+                    Macierz[k][p] = Sciezki[Sciezki.size()-1];
                 }
             }
         }
