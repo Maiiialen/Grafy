@@ -47,44 +47,38 @@ Graf::Graf(int il_wierz){
 
 void Graf::Tworzenie_sc(int proc){
     srand(time(NULL));
-    int ilosc = proc*(Wierzcholki.size()*(Wierzcholki.size()-1))/200, wartosc, p, k, test, n = Wierzcholki.size() -1;
-    for(int i=0; i < Wierzcholki.size() - 1; ++i){
-        wartosc = (rand() % 20) + 0;
-        Sciezki.push_back(new Sciezka(Wierzcholki[i], Wierzcholki[i+1], wartosc, i));
+    int ilosc = proc*(Wierzcholki.size()*(Wierzcholki.size()-1))/200, wartosc, i, p, k, test, n = Wierzcholki.size() -1;
+    if(proc != 100){
+        for(int i=0; i < Wierzcholki.size() - 1; ++i){
+            wartosc = (rand() % 20) + 0;
+            Sciezki.push_back(new Sciezka(Wierzcholki[i], Wierzcholki[i+1], wartosc, i));
 
-        Macierz[i][i+1]=Sciezki[i];
-        Macierz[i+1][i]=Sciezki[i];
-    }
-    
-    for(int i=Sciezki.size() - 2; i < ilosc;){
-        
-        wartosc = rand() % 20 + 1;
-        p = rand() % n + 1;
-        k = rand() % n + 1;
-        if(p != k){
-            test=0;
-            for(int j = 0; j < Wierzcholki.size()-1; ++j){
-                if(test==1)
-                    break;
+            Macierz[i][i+1]=Sciezki[i];
+            Macierz[i+1][i]=Sciezki[i];
+        }
 
-                for(int z = 0; z < Wierzcholki.size()-1; ++z){
-                    if(Macierz[j][z] != NULL){
-                        if(Macierz[j][z]->Pocz() == p && Macierz[j][z]->Kon() == k){
-                            test=1;
-                            cout << "korok " << p << " " << k << " : " << j << " " << z << endl;
-                            break;
-                        }
-                    }
+        while(Sciezki.size() < ilosc){
+            i = Sciezki.size()-1;
+            wartosc = rand() % 20 + 1;
+            p = rand() % n + 1;
+            k = rand() % n + 1;
+            if(p != k){
+                if(Macierz[p][k] == NULL){
+                    Sciezki.push_back(new Sciezka(Wierzcholki[p], Wierzcholki[k], wartosc, i));
+                    Macierz[p][k]=Sciezki[i-1];
+                    Macierz[k][p]=Sciezki[i-1];
                 }
             }
-            if(test==0){
-                cout << "koook " << p << " " << k << endl;
-                ++i;
-                Sciezki.push_back(new Sciezka(Wierzcholki[i], Wierzcholki[i+1], wartosc, i));
-                Macierz[p][k]=Sciezki[Sciezki.size()-1];
-                Macierz[k][p]=Sciezki[Sciezki.size()-1];
+        }
+    } else {
+        for(int z = 0; z < Wierzcholki.size(); ++z){
+            for(int c = 0; c < Wierzcholki.size(); ++c){
+                if(z != c && Macierz[z][c] == NULL){
+                    Sciezki.push_back(new Sciezka(Wierzcholki[z], Wierzcholki[c], rand() % 20 + 1, Sciezki.size()));
+                    Macierz[z][c] = Sciezki[Sciezki.size()-1];
+                    Macierz[c][z] = Sciezki[Sciezki.size()-1];
+                }
             }
         }
     }
-    
 }
