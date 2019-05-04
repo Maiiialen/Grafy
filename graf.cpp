@@ -50,9 +50,6 @@ void Graf::Wyswietlanie(){
         }
         cout << endl;
     }
-    for(int j = 0; j < Sciezki.size(); ++j){
-        cout << Sciezki[j]->Wartosc() << " ";
-    }
 }
 
 Graf::Graf(int il_wierz){

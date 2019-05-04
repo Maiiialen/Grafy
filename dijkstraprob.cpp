@@ -9,10 +9,16 @@ void Graf::dijkstra(int poczatek){
     vector <Wierzcholek> wierzki;  //lista
     Wierzcholek w(0);
     int *dl = new int [Wierzcholki.size()];
+    dl[poczatek] = 0;
 
     for (int i = 0; i < Wierzcholki.size(); ++i){   //bledne
         if(Macierz[poczatek][i] != NULL){
             dl[i] = Macierz[poczatek][i]->Wartosc();
+            //Dodaj dane z macierzy do listy wierzki
+            w.Zmiana(i, dl[i]);
+            wierzki.push_back(w);
+        } else{
+            dl[i] = 1000;
             //Dodaj dane z macierzy do listy wierzki
             w.Zmiana(i, dl[i]);
             wierzki.push_back(w);

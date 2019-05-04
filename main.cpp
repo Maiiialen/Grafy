@@ -10,8 +10,6 @@ int main(){
     gr.Wczytanie_z_pliku("test.txt");
     gr.dijkstra(0);
     cout << endl;
-    cout << "cooooooooook" << endl;
-    cout << endl;
     gr.Wyswietlanie();
   
 }
