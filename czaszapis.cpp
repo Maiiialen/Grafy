@@ -1,6 +1,6 @@
 #include <iostream>
 #include <fstream>
-#include "graf.cpp"
+#include "dijkstraprob.cpp"
 
 using namespace std;
 

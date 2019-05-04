@@ -8,6 +8,10 @@ int main(){
     int proc = 25, ilosc = proc*(gr.Wierz_size()*(gr.Wierz_size()-1))/200;
     //gr.Tworzenie_sc(ilosc);
     gr.Wczytanie_z_pliku("test.txt");
+    gr.dijkstra(0);
+    cout << endl;
+    cout << "cooooooooook" << endl;
+    cout << endl;
     gr.Wyswietlanie();
   
 }

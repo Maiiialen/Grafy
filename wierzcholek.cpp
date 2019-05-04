@@ -4,14 +4,25 @@ using namespace std;
 
 class Wierzcholek {
     int index;
+    int odl;
 
     public:
     Wierzcholek(int indx){
         index = indx;
+        odl = 1000;
     }
 
     int Index(){
         return index;
     }
+    
+    void Zmiana(int in, int od){
+        index = in;
+        odl = od;
+    }
 
+    //!Przeciazamy operator mniejszosci dla klasy cWierzcholek
+    friend bool operator < (const Wierzcholek &p1, const Wierzcholek &p2){
+        return(p1.odl > p2.odl);
+    }
 };

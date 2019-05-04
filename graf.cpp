@@ -5,6 +5,8 @@
 
 using namespace std;
 
+#define nieskonczonosc 1000
+
 class Graf {
     Sciezka *** Macierz;
     vector <Sciezka *> Sciezki;
@@ -17,8 +19,21 @@ class Graf {
     void Wyswietlanie();
     int Wierz_size();
     void Wczytanie_z_pliku(string nazwa);
+    void dijkstra(int poczatek);
+    vector <int> Nastepne(int poczatek);
 };
 
+
+
+vector <int> Graf::Nastepne(int poczatek){
+    vector <int> nastepne;
+    for (int i = 0; i < Wierzcholki.size(); i++){
+        if (Macierz[poczatek][i] != NULL && Macierz[poczatek][i]->Wartosc() != 0){
+            nastepne.push_back(i);
+        }
+    }
+    return nastepne;
+}
 
 int Graf::Wierz_size(){
     return Wierzcholki.size(); 
