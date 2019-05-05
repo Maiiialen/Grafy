@@ -4,15 +4,10 @@
 
 using namespace std;
 
-class Kopiec {
-
-    public:
-
-    void Stworz(vector <int> & tab){
+    void Stworz(vector <Wierzcholek> & tab){
         kopcowanie(tab, 0, tab.size());
     }
 
-    void Usun_pierwszy(vector <int> & tab){
-        kopcowanie(tab, 0, tab.size());
+    void Usun(vector <Wierzcholek> & tab){
+        tab.pop_back();
     }
-};

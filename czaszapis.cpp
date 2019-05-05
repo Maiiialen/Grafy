@@ -5,7 +5,7 @@
 using namespace std;
 
 void Graf::Wczytanie_z_pliku(string nazwa){
-    fstream plik;                       //utworzenie zmiennej dostępu do pliku
+    fstream plik;                      //utworzenie zmiennej dostępu do pliku
     int il_kraw, il_wierz, pierwszy, pocz, kon, waga;
     plik.open(nazwa, ios::in);  //otworzenie pliku w opcji czytania
     if(plik.good() == true ){          //sprawdzenie czy otworzenie/utworzenie pliku się powiodło
@@ -18,5 +18,15 @@ void Graf::Wczytanie_z_pliku(string nazwa){
             Macierz[kon][pocz]=Sciezki[Sciezki.size()-1];
         }
     }
-    plik.close(); 
+    plik.close();
+
+    for(int i = 0; i < il_kraw; ++i){
+        for(int j = 0; j < il_kraw; ++j){
+            if(Macierz[i][j] == NULL){
+                Sciezka* sc = new Sciezka(new Wierzcholek(i), new Wierzcholek(j), 0, 0);
+                Macierz[i][j]=sc;
+                delete sc;
+            }
+        }
+    }
 }

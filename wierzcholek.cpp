@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 
 using namespace std;
@@ -7,7 +8,7 @@ class Wierzcholek {
     int odl;
 
     public:
-    
+
     Wierzcholek(int indx){
         index = indx;
         odl = 1000;
@@ -15,6 +16,10 @@ class Wierzcholek {
 
     int Index(){
         return index;
+    }
+
+    int Odleglosc(){
+        return odl;
     }
     
     void Zmiana(int in, int od){
