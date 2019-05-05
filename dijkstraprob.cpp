@@ -1,6 +1,7 @@
 #include <iostream>
 #include <algorithm>
 #include "graf.cpp"
+#include "lista.cpp"
 
 using namespace std;
 
@@ -26,7 +27,7 @@ void Graf::dijkstra(int poczatek){
     }
 
     //tworzymy kopiec
-    make_heap(wierzki.begin(), wierzki.end(), less<Wierzcholek>()); //less??
+    make_heap(wierzki.begin(), wierzki.end(), less<Wierzcholek>());
 
     while (wierzki.empty() != true){
         //przywrocenie wlasnosci kopca

@@ -10,6 +10,7 @@ class Sciezka {
     int index;
 
     public:
+    
     Sciezka(Wierzcholek * pocz, Wierzcholek * kon, int w, int i){
         poczatek = pocz;
         koniec = kon;

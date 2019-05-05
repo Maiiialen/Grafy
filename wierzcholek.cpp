@@ -7,6 +7,7 @@ class Wierzcholek {
     int odl;
 
     public:
+    
     Wierzcholek(int indx){
         index = indx;
         odl = 1000;
