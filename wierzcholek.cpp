@@ -11,7 +11,7 @@ class Wierzcholek {
 
     Wierzcholek(int indx){
         index = indx;
-        odl = 1000;
+        odl = 0;
     }
 
     int Index(){

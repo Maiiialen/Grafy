@@ -5,8 +5,6 @@
 
 using namespace std;
 
-#define nieskonczonosc 1000
-
 class Graf {
     Sciezka *** Macierz;
     vector <Sciezka *> Sciezki;
@@ -28,17 +26,10 @@ class Graf {
 
 vector <int> Graf::Nastepne(int poczatek){
     vector <int> nastepne;
-            cout << "cok?" << endl;
     for (int i = 0; i < Wierz_size(); ++i){
-            cout << "aaa " << poczatek << " " << i << " " << Wierz_size() << endl;
-        if (Macierz[poczatek][i] != NULL){
-            cout << "cok!" << endl;
-            if(Macierz[poczatek][i]->Wartosc() != 0){
-            cout << "cokcok!!" << endl;
-                nastepne.push_back(i);
-            }
+        if(Macierz[poczatek][i]->Wartosc() != 0){
+            nastepne.push_back(i);
         }
-        cout << "cokcok" << endl;
     }
     return nastepne;
 }
@@ -63,9 +54,7 @@ Graf::Graf(int il_wierz){
     }
     for(int i = 0; i < il_wierz; ++i){
         for(int j = 0; j < il_wierz; ++j){
-            Sciezka* sc = new Sciezka(new Wierzcholek(i), new Wierzcholek(j), 0, 0);
-            Macierz[i][j]=sc;
-            delete sc;
+            Macierz[i][j] = new Sciezka(new Wierzcholek(i), new Wierzcholek(j), 0, 0);
         }
     }
     for(int i = 0; i < il_wierz; ++i){

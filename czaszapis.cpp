@@ -19,14 +19,4 @@ void Graf::Wczytanie_z_pliku(string nazwa){
         }
     }
     plik.close();
-
-    for(int i = 0; i < il_kraw; ++i){
-        for(int j = 0; j < il_kraw; ++j){
-            if(Macierz[i][j] == NULL){
-                Sciezka* sc = new Sciezka(new Wierzcholek(i), new Wierzcholek(j), 0, 0);
-                Macierz[i][j]=sc;
-                delete sc;
-            }
-        }
-    }
 }
