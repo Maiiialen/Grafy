@@ -14,7 +14,6 @@ int main(){
     gr.dijkstra(5);
     cout << endl;
     //gr.Wyswietlanie();
-    //dsadsadsadsasad
 
 }
 
