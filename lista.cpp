@@ -12,21 +12,13 @@ class Wezel {
     friend class Lista<E>;
 
     public:
-    E Element(){
-        return element;
-    }
+    E Element(){ return element; }
 
-    Wezel Nastepny(){
-        return nastepny;
-    }
+    Wezel Nastepny(){ return nastepny; }
 
-    void Ustaw_elem(E elem){
-        element = elem;
-    }
+    void Ustaw_elem(E elem){ element = elem; }
 
-    void Ustaw_nast(E nast){
-        nastepny = nast;
-    }
+    void Ustaw_nast(E nast){ nastepny = nast; }
 };
 
 template <typename E>
