@@ -19,22 +19,8 @@ class Grafm {
     void Wczytanie_z_pliku(string nazwa);
     void dijkstra(int poczatek);
     void dijkstra(int pocz, int koniec);
-    vector <int> Nastepne(int poczatek);
-    void kopcowanie(vector <int> &tab, int poczatek, int koniec);
     int minodl(int dl[], bool odwiedzone[]);
 };
-
-
-
-vector <int> Grafm::Nastepne(int poczatek){
-    vector <int> nastepne;
-    for (int i = 0; i < Wierz_size(); ++i){
-        if(Macierz[poczatek][i]->Wartosc() != 0){
-            nastepne.push_back(i);
-        }
-    }
-    return nastepne;
-}
 
 int Grafm::Wierz_size(){
     return Wierzcholki.size(); 

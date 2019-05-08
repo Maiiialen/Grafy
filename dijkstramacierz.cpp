@@ -1,8 +1,6 @@
 #include <iostream>
 #include <algorithm>
 #include "Grafmacierz.cpp"
-#include "lista.cpp"
-#include "kopiec.cpp"
 
 using namespace std;
 

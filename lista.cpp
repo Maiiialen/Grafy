@@ -1,34 +1,32 @@
 #include <iostream>
+#include "Sciezkal.cpp"
 
 using namespace std;
 
-template <typename E>
 class Lista;
 
-template <typename E>
 class Wezel {
-    E element;
-    Wezel<E>* nastepny;
-    friend class Lista<E>;
+    Sciezkal* element;
+    Wezel* nastepny;
+    friend class Lista;
 
     public:
-    E Element(){ return element; }
+    Sciezkal* Element(){ return element; }
 
-    Wezel Nastepny(){ return nastepny; }
+    Wezel* Nastepny(){ return nastepny; }
 
-    void Ustaw_elem(E elem){ element = elem; }
+    void Ustaw_elem(Sciezkal* elem){ element = elem; }
 
-    void Ustaw_nast(E nast){ nastepny = nast; }
+    void Ustaw_nast(Wezel* nast){ nastepny = nast; }
 };
 
-template <typename E>
 class Lista {
-    Wezel<E>* poczatek;
+    Wezel* poczatek;
 
     public:
     
     Lista(){
-        poczatek = new Wezel<E>();
+        poczatek = new Wezel();
         poczatek->Ustaw_elem(NULL);
     }
 
@@ -42,26 +40,26 @@ class Lista {
         }
     }
 
-    bool empty() const{
+    bool empty(){
         if(poczatek->nastepny != NULL)
             return 0;
         return 1;
     }
 
-    const E& pierwszy() const{
+    Wezel* pierwszy(){
         return poczatek;
     }
 
-    void dod_na_pocz(const E& elem){
-        Wezel<E>* zmienna = new Wezel<E>;
+    void dod_na_pocz(Sciezkal* elem){
+        Wezel* zmienna = new Wezel;
         zmienna->element = elem;
-        zmienna->nastepny = pierwszy;
-        pierwszy = zmienna;
+        zmienna->nastepny = pierwszy();
+        poczatek = zmienna;
     }
 
     void usun_pierwszy(){
-        Wezel<E>* zmienna = pierwszy;
-        pierwszy = zmienna->nastepny;
+        Wezel* zmienna = poczatek;
+        poczatek = zmienna->nastepny;
         delete zmienna;
     }
 };
