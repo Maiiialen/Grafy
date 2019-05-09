@@ -41,7 +41,7 @@ class Lista {
     }
 
     bool empty(){
-        if(poczatek->nastepny != NULL)
+        if(poczatek != NULL)
             return 0;
         return 1;
     }
@@ -62,4 +62,28 @@ class Lista {
         poczatek = zmienna->nastepny;
         delete zmienna;
     }
+
+    void Wyswietl_lista(){
+        Wezel* zmienna = poczatek;
+        while(1){
+            if(zmienna != NULL){
+                cout << zmienna->Element()->Kon() << " " << zmienna->Element()->Wartosc() << ";   ";
+                zmienna = zmienna->Nastepny();
+            } else {
+                break;
+            }
+        }
+    }
 };
+
+int Czy_istnieje(Lista list, int kon){
+    Wezel* zmienna = list.pierwszy();
+    while(list.empty()){
+        if(zmienna->Element()->Kon() == kon){
+            cout << "aaa " << kon << endl;
+            return 1;
+        }
+        zmienna = zmienna->Nastepny();
+    }
+    return 0;
+}

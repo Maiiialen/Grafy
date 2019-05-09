@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include "dijkstramacierz.cpp"
-#include "graflista.cpp"
+#include "dijkstra_lista.cpp"
 
 using namespace std;
 
@@ -21,7 +21,7 @@ void Grafm::Wczytanie_z_pliku(string nazwa){
     }
     plik.close();
 }
-/*
+
 void Grafl::Wczytanie_z_pliku(string nazwa){
     fstream plik;                      //utworzenie zmiennej dostępu do pliku
     int il_kraw, il_wierz, pierwszy, pocz, kon, waga;
@@ -31,10 +31,9 @@ void Grafl::Wczytanie_z_pliku(string nazwa){
         Grafl gr(il_wierz);
         for(int i = 0; i < il_kraw; ++i){
             plik >> pocz >> kon >> waga;
-            Sciezki.push_back(new Sciezka(Wierzcholki[kon], waga));
-            Macierz[pocz][kon]=Sciezki[Sciezki.size()-1];
-            Macierz[kon][pocz]=Sciezki[Sciezki.size()-1];
+            Tablica[pocz].dod_na_pocz(new Sciezkal(Wierzcholki[kon], waga));
+            Tablica[kon].dod_na_pocz(new Sciezkal(Wierzcholki[pocz], waga));
         }
     }
     plik.close();
-}*/
+}
