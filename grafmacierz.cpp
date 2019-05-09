@@ -13,6 +13,7 @@ class Grafm {
     public:
 
     Grafm(int il_wierz);
+    ~Grafm();
     void Tworzenie_sc(int proc);
     void Wyswietlanie();
     int Wierz_size();
@@ -21,6 +22,18 @@ class Grafm {
     void dijkstra(int pocz, int koniec);
     int minodl(int dl[], bool odwiedzone[]);
 };
+
+Grafm::~Grafm(){
+    for(int i = 0; i < Wierz_size(); ++i){
+        for(int j = 0; j < Wierz_size(); ++j){
+            delete Macierz[i][j];
+        }
+    }
+    for(int i = 0; i < Wierz_size(); ++i){
+        delete Macierz[i];
+    }
+    delete Macierz;
+}
 
 int Grafm::Wierz_size(){
     return Wierzcholki.size(); 

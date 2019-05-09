@@ -28,6 +28,7 @@ class Lista {
     Lista(){
         poczatek = new Wezel();
         poczatek->Ustaw_elem(NULL);
+        poczatek->Ustaw_nast(NULL);
     }
 
     ~Lista(){
@@ -65,25 +66,24 @@ class Lista {
 
     void Wyswietl_lista(){
         Wezel* zmienna = poczatek;
-        while(1){
-            if(zmienna != NULL){
-                cout << zmienna->Element()->Kon() << " " << zmienna->Element()->Wartosc() << ";   ";
-                zmienna = zmienna->Nastepny();
-            } else {
-                break;
-            }
+        while(zmienna->Element() != NULL){
+            cout << zmienna->Element()->Kon() << " " << zmienna->Element()->Wartosc() << ";   ";
+            zmienna = zmienna->Nastepny();
         }
     }
 };
 
-int Czy_istnieje(Lista list, int kon){
-    Wezel* zmienna = list.pierwszy();
-    while(list.empty()){
-        if(zmienna->Element()->Kon() == kon){
-            cout << "aaa " << kon << endl;
-            return 1;
+bool Czy_istnieje(Lista& list, int kon){
+    if(list.empty()){
+        return 0;
+    } else {
+        Wezel* zmienna = list.pierwszy();
+        while(zmienna->Nastepny() != NULL){
+            if(zmienna->Element()->Kon() == kon){
+                return 1;
+            }
+            zmienna = zmienna->Nastepny();
         }
-        zmienna = zmienna->Nastepny();
     }
     return 0;
 }

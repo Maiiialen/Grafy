@@ -1,11 +1,12 @@
 #include <iostream>
 #include <algorithm>
+#include <climits>
 #include "Grafmacierz.cpp"
 
 using namespace std;
 
 int Grafm::minodl(int dl[], bool odwiedzone[]){
-    int male = 1000, indx;
+    int male = INT_MAX, indx;
     for(int i = 0; i < Wierz_size(); ++i){
         if(odwiedzone[i] == 0 && dl[i] <= male){
             male = dl[i];
@@ -21,7 +22,7 @@ void Grafm::dijkstra(int pocz){
     int *dl = new int [Wierz_size()];
 
     for (int i = 0; i < Wierz_size(); ++i){
-        dl[i] = 1000;
+        dl[i] = INT_MAX;
         odwiedzone[i] = 0;
     }
     dl[pocz] = 0;
@@ -31,7 +32,7 @@ void Grafm::dijkstra(int pocz){
         zmienna = minodl(dl, odwiedzone);
         odwiedzone[zmienna] = 1;
         for(int j = 0; j < Wierz_size(); ++j){
-            if(!odwiedzone[j] && Macierz[zmienna][j]->Wartosc() && dl[zmienna] != 1000 && dl[zmienna] + Macierz[zmienna][j]->Wartosc() < dl[j]){
+            if(!odwiedzone[j] && Macierz[zmienna][j]->Wartosc() && dl[zmienna] != INT_MAX && dl[zmienna] + Macierz[zmienna][j]->Wartosc() < dl[j]){
                 dl[j] = dl[zmienna] + Macierz[zmienna][j]->Wartosc();
             }
         }
@@ -48,7 +49,7 @@ void Grafm::dijkstra(int pocz, int koniec){
     int *dl = new int [Wierz_size()];
 
     for (int i = 0; i < Wierz_size(); ++i){
-        dl[i] = 1000;
+        dl[i] = INT_MAX;
         odwiedzone[i] = 0;
     }
     dl[pocz] = 0;
@@ -58,7 +59,7 @@ void Grafm::dijkstra(int pocz, int koniec){
         zmienna = minodl(dl, odwiedzone);
         odwiedzone[zmienna] = 1;
         for(int j = 0; j < Wierz_size(); ++j){
-            if(!odwiedzone[j] && Macierz[zmienna][j]->Wartosc() && dl[zmienna] != 1000 && dl[zmienna] + Macierz[zmienna][j]->Wartosc() < dl[j]){
+            if(!odwiedzone[j] && Macierz[zmienna][j]->Wartosc() && dl[zmienna] != INT_MAX && dl[zmienna] + Macierz[zmienna][j]->Wartosc() < dl[j]){
                 dl[j] = dl[zmienna] + Macierz[zmienna][j]->Wartosc();
             }
         }

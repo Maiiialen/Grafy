@@ -18,6 +18,11 @@ class Sciezka {
         index = i;
     }
 
+    ~Sciezka(){
+        delete poczatek;
+        delete koniec;
+    }
+
     int Pocz(){
         return poczatek->Index();
     }

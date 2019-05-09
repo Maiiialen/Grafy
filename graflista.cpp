@@ -8,7 +8,6 @@ using namespace std;
 class Grafl {
     Lista* Tablica;
     vector <Wierzcholek *> Wierzcholki;
-    int ilosc_wierzcholkow;
 
     public:
 
@@ -24,7 +23,7 @@ class Grafl {
 };
 
 int Grafl::Wierz_size(){
-    return ilosc_wierzcholkow; 
+    return Wierzcholki.size(); 
 }
 
 void Grafl::Wyswietlanie(){
@@ -37,7 +36,6 @@ void Grafl::Wyswietlanie(){
 
 Grafl::Grafl(int il_wierz){
     Tablica = new Lista [il_wierz];
-    ilosc_wierzcholkow = il_wierz;
     for(int i = 0; i < il_wierz; ++i){
         Wierzcholki.push_back(new Wierzcholek(i));
     }
@@ -54,8 +52,6 @@ void Grafl::Tworzenie_sc(int ilosc){
             ++ilosc_sc;
             wartosc = (rand() % 20) + 1;
 
-            cout << "wart: " << i << ", " << i+1 << ", " << wartosc << endl;
-
             Tablica[i].dod_na_pocz(new Sciezkal(Wierzcholki[i+1], wartosc));
             Tablica[i+1].dod_na_pocz(new Sciezkal(Wierzcholki[i], wartosc));
         }
@@ -64,9 +60,8 @@ void Grafl::Tworzenie_sc(int ilosc){
             p = rand() % Wierz_size()-1 + 1;
             k = rand() % Wierz_size()-1 + 1;
             if(p != k){
-                if(Czy_istnieje(Tablica[p], k) == 0){
+                if(!Czy_istnieje(Tablica[p], k)){
                     wartosc = rand() % 20 + 1;
-                cout << "wart: " << p << ", " << k << ", " << wartosc << endl;
                     ++ilosc_sc;
 
                     Tablica[p].dod_na_pocz(new Sciezkal(Wierzcholki[k], wartosc));
@@ -77,11 +72,12 @@ void Grafl::Tworzenie_sc(int ilosc){
     } else {
         for(int z = 0; z < Wierz_size(); ++z){
             for(int c = 0; c < Wierz_size(); ++c){
-                if(z != c && !Czy_istnieje(Tablica[p], k)){
-
-            cout << "wart: " << z << ", " << c << ", " << wartosc;
-                    Tablica[z].dod_na_pocz(new Sciezkal(Wierzcholki[c], wartosc));
-                    Tablica[c].dod_na_pocz(new Sciezkal(Wierzcholki[z], wartosc));
+                if(z != c){
+                    if(!Czy_istnieje(Tablica[z], c)){
+                        wartosc = rand() % 20 + 1;
+                        Tablica[z].dod_na_pocz(new Sciezkal(Wierzcholki[c], wartosc));
+                        Tablica[c].dod_na_pocz(new Sciezkal(Wierzcholki[z], wartosc));
+                    }
                 }
             }
         }

@@ -14,6 +14,10 @@ class Sciezkal {
         waga = w;
     }
 
+    ~Sciezkal(){
+        delete koniec;
+    }
+
     int Kon(){
         return koniec->Index();
     }

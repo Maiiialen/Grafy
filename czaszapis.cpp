@@ -5,6 +5,10 @@
 
 using namespace std;
 
+void czasy(){
+    
+}
+
 void Grafm::Wczytanie_z_pliku(string nazwa){
     fstream plik;                      //utworzenie zmiennej dostępu do pliku
     int il_kraw, il_wierz, pierwszy, pocz, kon, waga;
