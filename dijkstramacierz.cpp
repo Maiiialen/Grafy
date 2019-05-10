@@ -37,10 +37,11 @@ void Grafm::dijkstra(int pocz){
             }
         }
     }
-
+    /*
     for (int i = 0; i < Wierzcholki.size(); ++i){
         cout << "i, dl: " << i << " " << dl[i] << endl;
     }
+    */
 }
 
 void Grafm::dijkstra(int pocz, int koniec){
@@ -68,5 +69,5 @@ void Grafm::dijkstra(int pocz, int koniec){
         }
     }
 
-    cout << "i, dl: " << koniec << " " << dl[koniec] << endl;
+    //cout << "i, dl: " << koniec << " " << dl[koniec] << endl;
 }

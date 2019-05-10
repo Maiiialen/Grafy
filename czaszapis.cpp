@@ -1,12 +1,79 @@
 #include <iostream>
 #include <fstream>
+#include <string>
+#include <chrono>
 #include "dijkstramacierz.cpp"
 #include "dijkstra_lista.cpp"
 
 using namespace std;
 
+// Funkcja zapisująca do pliku pierwszą nazwę, która znajduję się jako pierwsza
+//  w linii, dzięki czemu po odwróceniu tabelu w excelu będzie tytułem kolumny
+// wejścia: napis "nazwa"
+void zapis_nazwy(string nazwa){
+    fstream plik;                       //utworzenie zmiennej dostępu do pliku
+    plik.open( "pamsi5.txt", ios::app);  //otworzenie pliku w opcji dopisania
+    if( plik.good() == true ){          //sprawdzenie czy otworzenie/utworzenie pliku się powiodło
+        plik << endl;                   //wpisanie do pliku
+        plik << nazwa << " ";
+    }
+    plik.close();                       //zamknięcie pliku
+}
+
+// Funkcja zapisująca do pliku zmierzone czasy działania funkcji sortujących,
+//  oddziela je znakami spacji, aby móc je wczytać do programu Excel
+// wejścia: czas otrzymany z pomiarów "time"
+void zapis(chrono::duration<double> time){
+    fstream plik;                       //utworzenie zmiennej dostępu do pliku
+    plik.open( "pamsi5.txt", ios::app);  //otworzenie pliku w opcji dopisania
+    if( plik.good() == true ){          //sprawdzenie czy otworzenie/utworzenie pliku się powiodło
+        plik << " ";                    //wpisanie do pliku
+        plik << time.count();
+        plik.close();                   //zamknięcie pliku
+    }
+}
+
 void czasy(){
-    
+    int proc[] = {25, 50, 75, 100};
+    int ilosc[] = {10, 50, 100, 500, 1000};
+    int il;
+/*
+    for(int i = 0; i < 5; ++i){
+        Grafm* gr = new Grafm(ilosc[i]);
+
+        for(int j = 0; j < 4; ++j){
+            zapis_nazwy("macierz_" + to_string(ilosc[i]) + "_" + to_string(proc[j]) + " ");     // zapis nazwy, ilości elementów i stopnia posortowania do pliku
+            for(int k = 0; k < 100; ++k){
+                il = proc[j]*(gr->Wierz_size()*(gr->Wierz_size()-1))/200;
+                gr->Tworzenie_sc(il);
+                chrono::high_resolution_clock::time_point t1 = chrono::high_resolution_clock::now();        //zczytanie chwili rozpoczęcia testu funkcji
+                gr->dijkstra(j);
+                chrono::high_resolution_clock::time_point t2 = chrono::high_resolution_clock::now();        //zczytanie chwili zakończenia testu funkcji
+                chrono::duration<double> time = t2 - t1;
+                zapis(time);
+            }
+        }
+        //delete gr;
+    }*/
+    for(int i = 4; i < 5; ++i){
+        cout << "tuuu" << endl;
+
+        for(int j = 3; j < 4; ++j){
+            zapis_nazwy("lista_" + to_string(ilosc[i]) + "_" + to_string(proc[j]) + " ");     // zapis nazwy, ilości elementów i stopnia posortowania do pliku
+
+            for(int k = 0; k < 50; ++k){
+                Grafl* gr = new Grafl(ilosc[i]);
+                il = proc[j]*(gr->Wierz_size()*(gr->Wierz_size()-1))/200;
+                gr->Tworzenie_sc(il);
+                chrono::high_resolution_clock::time_point t1 = chrono::high_resolution_clock::now();        //zczytanie chwili rozpoczęcia testu funkcji
+                gr->dijkstra(j);
+                chrono::high_resolution_clock::time_point t2 = chrono::high_resolution_clock::now();        //zczytanie chwili zakończenia testu funkcji
+                chrono::duration<double> time = t2 - t1;
+                zapis(time);
+                delete gr;
+            }
+        }
+    }
 }
 
 void Grafm::Wczytanie_z_pliku(string nazwa){

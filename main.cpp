@@ -5,6 +5,9 @@
 using namespace std;
 
 int main(){
+    czasy();
+    cout << "koniec!" << endl;
+    /*
     Grafm* gr = new Grafm(10);
     int proc = 25, ilosc = proc*(gr->Wierz_size()*(gr->Wierz_size()-1))/200;
     gr->Tworzenie_sc(ilosc);
@@ -14,15 +17,7 @@ int main(){
     cout << endl;
     gr->dijkstra(0);
     delete gr;
-
-    cout << "a" << endl;
-    cout << "cos " << gr->Wierz_size() << endl;
-    cout << "b" << endl;
-
-    Wierzcholek* wierz = new Wierzcholek(1);
-    cout << "a " << wierz->Index();
-    delete[] wierz;
-    cout << "b " << wierz->Index();
+    */
 }
 
 // kiokokoko
