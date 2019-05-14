@@ -19,5 +19,3 @@ int main(){
     delete gr;
     */
 }
-
-// kiokokoko

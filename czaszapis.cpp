@@ -12,7 +12,7 @@ using namespace std;
 // wejścia: napis "nazwa"
 void zapis_nazwy(string nazwa){
     fstream plik;                       //utworzenie zmiennej dostępu do pliku
-    plik.open( "pamsi5.txt", ios::app);  //otworzenie pliku w opcji dopisania
+    plik.open( "pamsi6.txt", ios::app);  //otworzenie pliku w opcji dopisania
     if( plik.good() == true ){          //sprawdzenie czy otworzenie/utworzenie pliku się powiodło
         plik << endl;                   //wpisanie do pliku
         plik << nazwa << " ";
@@ -25,7 +25,7 @@ void zapis_nazwy(string nazwa){
 // wejścia: czas otrzymany z pomiarów "time"
 void zapis(chrono::duration<double> time){
     fstream plik;                       //utworzenie zmiennej dostępu do pliku
-    plik.open( "pamsi5.txt", ios::app);  //otworzenie pliku w opcji dopisania
+    plik.open( "pamsi6.txt", ios::app);  //otworzenie pliku w opcji dopisania
     if( plik.good() == true ){          //sprawdzenie czy otworzenie/utworzenie pliku się powiodło
         plik << " ";                    //wpisanie do pliku
         plik << time.count();
@@ -37,7 +37,7 @@ void czasy(){
     int proc[] = {25, 50, 75, 100};
     int ilosc[] = {10, 50, 100, 500, 1000};
     int il;
-/*
+
     for(int i = 0; i < 5; ++i){
         Grafm* gr = new Grafm(ilosc[i]);
 
@@ -53,15 +53,14 @@ void czasy(){
                 zapis(time);
             }
         }
-        //delete gr;
-    }*/
-    for(int i = 4; i < 5; ++i){
+    }
+    for(int i = 0; i < 5; ++i){
         cout << "tuuu" << endl;
 
-        for(int j = 3; j < 4; ++j){
+        for(int j = 0; j < 4; ++j){
             zapis_nazwy("lista_" + to_string(ilosc[i]) + "_" + to_string(proc[j]) + " ");     // zapis nazwy, ilości elementów i stopnia posortowania do pliku
 
-            for(int k = 0; k < 50; ++k){
+            for(int k = 0; k < 100; ++k){
                 Grafl* gr = new Grafl(ilosc[i]);
                 il = proc[j]*(gr->Wierz_size()*(gr->Wierz_size()-1))/200;
                 gr->Tworzenie_sc(il);
