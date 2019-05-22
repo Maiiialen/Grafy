@@ -5,6 +5,7 @@
 
 using namespace std;
 
+// funkcja zwracająca index najbliższego wierzchołka do sprawdzanego
 int Grafm::minodl(int dl[], bool odwiedzone[]){
     int male = INT_MAX, indx;   //ustawia odleglosc na nieskonczonosc i tworzy zmienna na indeks
     for(int i = 0; i < Wierz_size(); ++i){  //przechodzi przez wszystkie wierzcholki
@@ -16,6 +17,8 @@ int Grafm::minodl(int dl[], bool odwiedzone[]){
     return indx;    //zwraca indeks najblizszego nieuwzglednionego
 }
 
+// algorytm dijkstry szykający najkrótszych ścieżek do wszstkich pozostałych elementów
+// poczatek - wierzchołek początkowy, do którego szukamy najkrótszych ścieżek
 void Grafm::dijkstra(int pocz){
     int poczatek = pocz, zmienna;
     bool *odwiedzone = new bool [Wierz_size()]; //tworzy tablice okreslajaca ktore wierzcholki sa w drzewie najkrtoszej sciezki
@@ -45,6 +48,11 @@ void Grafm::dijkstra(int pocz){
     */
 }
 
+
+// algorytm dijkstry szykający najkrótszej ścieżki między danymi wierzchołkami
+// funkcja działa tak samo jak powyższa, a przerwanie następuje gdy znaleziona jest wartość szukana
+// poczatek - wierzchołek początkowy, do którego szukamy najkrótszej ścieżeki
+// koniec - wierzchołek końcowy, do którego szukamy najkrótszej ścieżeki
 void Grafm::dijkstra(int pocz, int koniec){
     int poczatek = pocz, zmienna;
     bool *odwiedzone = new bool [Wierz_size()];
@@ -55,7 +63,6 @@ void Grafm::dijkstra(int pocz, int koniec){
         odwiedzone[i] = 0;
     }
     dl[pocz] = 0;
-
 
     for(int i = 0; i < Wierz_size(); ++i){
         zmienna = minodl(dl, odwiedzone);

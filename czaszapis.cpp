@@ -33,76 +33,84 @@ void zapis(chrono::duration<double> time){
     }
 }
 
+// Funkcja wykonująca testy we wszystkich nadanych przypadkach
+//  i dla wszystkich badanych fuckcji
 void czasy(){
-    int proc[] = {25, 50, 75, 100};
-    int ilosc[] = {10, 50, 100, 500, 1000};
-    int il;
+    int proc[] = {25, 50, 75, 100};             // tablica gętości grafów
+    int ilosc[] = {10, 50, 100, 500, 1000};     // tablica ilości wierzchołków w grafach
+    int il;                                     // ilość ścieżek w grafie
 
-    for(int i = 0; i < 5; ++i){
-        Grafm* gr = new Grafm(ilosc[i]);
+    for(int i = 0; i < 5; ++i){   // pętla przechodząca przez ilosc[], zmienia ilość wierzchołków w grafie
+        Grafm* gr = new Grafm(ilosc[i]);    // tworzenie grafu o reprezentacji jako macierz sąsiedztwa
 
-        for(int j = 0; j < 4; ++j){
+        for(int j = 0; j < 4; ++j){     // pętla przechodząca przez proc[], zmienia gęstość grafu
             zapis_nazwy("macierz_" + to_string(ilosc[i]) + "_" + to_string(proc[j]) + " ");     // zapis nazwy, ilości elementów i stopnia posortowania do pliku
-            for(int k = 0; k < 100; ++k){
-                il = proc[j]*(gr->Wierz_size()*(gr->Wierz_size()-1))/200;
-                gr->Tworzenie_sc(il);
+            for(int k = 0; k < 100; ++k){   // pętla wykonująca powtórzenie 100 razy
+                il = proc[j]*(gr->Wierz_size()*(gr->Wierz_size()-1))/200;   // ustalenie ilości ścieżek
+                gr->Tworzenie_sc(il);       // funkcja tworząca graf pełny o dalen ilości ścieżek
                 chrono::high_resolution_clock::time_point t1 = chrono::high_resolution_clock::now();        //zczytanie chwili rozpoczęcia testu funkcji
-                gr->dijkstra(j);
+                gr->dijkstra(j);    // wykonanie algorytmu dijkstry
                 chrono::high_resolution_clock::time_point t2 = chrono::high_resolution_clock::now();        //zczytanie chwili zakończenia testu funkcji
                 chrono::duration<double> time = t2 - t1;
                 zapis(time);
             }
         }
     }
-    for(int i = 0; i < 5; ++i){
+    for(int i = 0; i < 5; ++i){   // pętla przechodząca przez ilosc[], zmienia ilość wierzchołków w grafie
         cout << "tuuu" << endl;
 
-        for(int j = 0; j < 4; ++j){
+        for(int j = 0; j < 4; ++j){     // pętla przechodząca przez proc[], zmienia gęstość grafu
             zapis_nazwy("lista_" + to_string(ilosc[i]) + "_" + to_string(proc[j]) + " ");     // zapis nazwy, ilości elementów i stopnia posortowania do pliku
 
-            for(int k = 0; k < 100; ++k){
-                Grafl* gr = new Grafl(ilosc[i]);
-                il = proc[j]*(gr->Wierz_size()*(gr->Wierz_size()-1))/200;
-                gr->Tworzenie_sc(il);
+            for(int k = 0; k < 100; ++k){   // pętla wykonująca powtórzenie 100 razy
+                Grafl* gr = new Grafl(ilosc[i]);    // utworzenie nowego grafu przedstawionego jako lista sąsiedztwa
+                il = proc[j]*(gr->Wierz_size()*(gr->Wierz_size()-1))/200;   // ustalenie ilości ścieżek
+                gr->Tworzenie_sc(il);       // funkcja tworząca graf pełny o dalen ilości ścieżek
                 chrono::high_resolution_clock::time_point t1 = chrono::high_resolution_clock::now();        //zczytanie chwili rozpoczęcia testu funkcji
-                gr->dijkstra(j);
+                gr->dijkstra(j);    // wykonanie algorytmu dijkstry
                 chrono::high_resolution_clock::time_point t2 = chrono::high_resolution_clock::now();        //zczytanie chwili zakończenia testu funkcji
                 chrono::duration<double> time = t2 - t1;
                 zapis(time);
-                delete gr;
+                delete gr;  // usówanie grafu
             }
         }
     }
 }
 
+// funkcja wczytująca graf opisany na macierzy z pliku tekstowego
+// zgodnie z wytycznymi w opisie projektu
+// wejścia: nazwa pliku
 void Grafm::Wczytanie_z_pliku(string nazwa){
     fstream plik;                      //utworzenie zmiennej dostępu do pliku
     int il_kraw, il_wierz, pierwszy, pocz, kon, waga;
     plik.open(nazwa, ios::in);  //otworzenie pliku w opcji czytania
     if(plik.good() == true ){          //sprawdzenie czy otworzenie/utworzenie pliku się powiodło
-        plik >> il_kraw >> il_wierz >> pierwszy;
-        Grafm gr(il_wierz);
+        plik >> il_kraw >> il_wierz >> pierwszy;    // wczytanie ilości krawędzi, wierzchołków i elementu dla którego szukamy ścieżek
+        Grafm gr(il_wierz);     // utworzenie grafu
         for(int i = 0; i < il_kraw; ++i){
-            plik >> pocz >> kon >> waga;
-            Sciezki.push_back(new Sciezka(Wierzcholki[pocz], Wierzcholki[kon], waga, Sciezki.size()));
-            Macierz[pocz][kon]=Sciezki[Sciezki.size()-1];
-            Macierz[kon][pocz]=Sciezki[Sciezki.size()-1];
+            plik >> pocz >> kon >> waga;        // zczytywanie z pliku parametrów ścieżek
+            Sciezki.push_back(new Sciezka(Wierzcholki[pocz], Wierzcholki[kon], waga, Sciezki.size()));  // dodawanie nowych ścieżek do listy
+            Macierz[pocz][kon]=Sciezki[Sciezki.size()-1];   // uzupełnianie macierzy o nową ścieżkę
+            Macierz[kon][pocz]=Sciezki[Sciezki.size()-1];   // uzupełnianie macierzy o tę samą ścieżkę w drógą stronę
         }
     }
     plik.close();
 }
 
+// funkcja wczytująca graf opisany na listach z pliku tekstowego
+// zgodnie z wytycznymi w opisie projektu
+// wejścia: nazwa pliku
 void Grafl::Wczytanie_z_pliku(string nazwa){
     fstream plik;                      //utworzenie zmiennej dostępu do pliku
-    int il_kraw, il_wierz, pierwszy, pocz, kon, waga;
+    int il_kraw, il_wierz, pierwszy, pocz, kon, waga;    // wczytanie ilości krawędzi, wierzchołków i elementu dla którego szukamy ścieżek
     plik.open(nazwa, ios::in);  //otworzenie pliku w opcji czytania
     if(plik.good() == true ){          //sprawdzenie czy otworzenie/utworzenie pliku się powiodło
         plik >> il_kraw >> il_wierz >> pierwszy;
-        Grafl gr(il_wierz);
+        Grafl gr(il_wierz);     // utworzenie grafu
         for(int i = 0; i < il_kraw; ++i){
-            plik >> pocz >> kon >> waga;
-            Tablica[pocz].dod_na_pocz(new Sciezkal(Wierzcholki[kon], waga));
-            Tablica[kon].dod_na_pocz(new Sciezkal(Wierzcholki[pocz], waga));
+            plik >> pocz >> kon >> waga;        // zczytywanie z pliku parametrów ścieżek
+            Tablica[pocz].dod_na_pocz(new Sciezkal(Wierzcholki[kon], waga));   // uzupełnianie listy o nową ścieżkę
+            Tablica[kon].dod_na_pocz(new Sciezkal(Wierzcholki[pocz], waga));   // uzupełnianie listy o tę samą ścieżkę w drógą stronę
         }
     }
     plik.close();

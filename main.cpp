@@ -5,8 +5,8 @@
 using namespace std;
 
 int main(){
-    czasy();
-    cout << "koniec!" << endl;
+    czasy();    // wywołanie funkcji wykonującej algorytmy i mierzącej czas
+    
     /*
     Grafm* gr = new Grafm(10);
     int proc = 25, ilosc = proc*(gr->Wierz_size()*(gr->Wierz_size()-1))/200;
@@ -16,6 +16,6 @@ int main(){
     gr->dijkstra(1, 7);
     cout << endl;
     gr->dijkstra(0);
-    delete gr;
+    cout << "koniec!" << endl;
     */
 }
